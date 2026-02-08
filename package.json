@@ -2,13 +2,11 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "orbstack",
   "title": "OrbStack",
-  "description": "Extension for OrbStack on macOS",
+  "description": "Manage OrbStack containers, images, compose projects, Linux machines, and Kubernetes",
   "icon": "extension-icon.png",
   "author": "nmindz",
-  "owner": "braindeadsec",
   "platforms": [
-    "macOS",
-    "Windows"
+    "macOS"
   ],
   "categories": [
     "Developer Tools"
@@ -16,23 +14,90 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "stop-orbstack",
-      "title": "Stop OrbStack",
-      "subtitle": "Stops the OrbStack engine",
-      "description": "Stops the OrbStack engine (including all pods and containers)",
-      "mode": "no-view"
+      "name": "container_list",
+      "title": "Manage Containers",
+      "subtitle": "OrbStack",
+      "description": "List and manage Docker containers",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "groupContainersByState",
+          "type": "checkbox",
+          "required": false,
+          "default": false,
+          "label": "Group containers by state",
+          "description": "Group containers by their state (running, exited, etc.)"
+        }
+      ]
+    },
+    {
+      "name": "projects_list",
+      "title": "Manage Compose Projects",
+      "subtitle": "OrbStack",
+      "description": "Manage Docker Compose Projects",
+      "mode": "view"
+    },
+    {
+      "name": "image_list",
+      "title": "Manage Images",
+      "subtitle": "OrbStack",
+      "description": "List and manage Docker images",
+      "mode": "view"
+    },
+    {
+      "name": "machine_list",
+      "title": "Manage Linux Machines",
+      "subtitle": "OrbStack",
+      "description": "List and manage Linux machines",
+      "mode": "view"
+    },
+    {
+      "name": "create_machine",
+      "title": "Create Linux Machine",
+      "subtitle": "OrbStack",
+      "description": "Create a new Linux machine",
+      "mode": "view"
+    },
+    {
+      "name": "kubernetes",
+      "title": "Manage Kubernetes",
+      "subtitle": "OrbStack",
+      "description": "Start or stop Kubernetes cluster",
+      "mode": "view"
     },
     {
       "name": "start-orbstack",
       "title": "Start OrbStack",
-      "subtitle": "Runs the OrbStack runtime and docker engine",
-      "description": "Starts/resumes the OrbStack engine",
+      "subtitle": "OrbStack",
+      "description": "Start the OrbStack application",
       "mode": "no-view"
+    },
+    {
+      "name": "stop-orbstack",
+      "title": "Stop OrbStack",
+      "subtitle": "OrbStack",
+      "description": "Stop the OrbStack application",
+      "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "socketPath",
+      "type": "textfield",
+      "required": false,
+      "title": "Docker Socket Path",
+      "description": "Path to Docker socket",
+      "default": "/var/run/docker.sock",
+      "placeholder": "/var/run/docker.sock"
     }
   ],
   "dependencies": {
     "@raycast/api": "^1.104.5",
-    "@raycast/utils": "^1.17.0"
+    "@raycast/utils": "^1.17.0",
+    "@priithaamer/dockerode": "^3.3.1-priithaamer.1"
+  },
+  "overrides": {
+    "tar-fs": ">=3.1.1"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
