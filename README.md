@@ -31,10 +31,23 @@ Comprehensive OrbStack management extension for Raycast. Control Docker containe
 - **Start OrbStack**: Launch the OrbStack application
 - **Stop OrbStack**: Gracefully quit the OrbStack application
 
-## Installation
+## Install
 
-1. Install [OrbStack](https://orbstack.dev/) on macOS
-2. Install this extension from the Raycast Store (when published) or build from source
+Not on the Raycast Store. Install [OrbStack](https://orbstack.dev/) first, then register this extension with every Raycast app on this Mac; no Raycast account or long-running dev server needed:
+
+```bash
+make install
+```
+
+| App                    | Bundle id             | Extensions folder                         | How it registers                                                                   |
+| ---------------------- | --------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------- |
+| Raycast 2 (retail 2.x) | `com.raycast.macos`   | `~/.config/raycast/extensions/orbstack`   | a short `ray develop` session with the project's CLI                               |
+| Raycast 1              | `com.raycast.macos`   | `~/.config/raycast/extensions/orbstack`   | `ray build` into the folder, then a restart (Raycast 1 scans it at launch)         |
+| Raycast Beta           | `com.raycast-x.macos` | `~/.config/raycast-x/extensions/orbstack` | a short `ray develop` session with the Raycast Beta CLI (`@raycast/api@latest-v0`) |
+
+The script reads the version of `com.raycast.macos` to tell Raycast 2 from Raycast 1. Raycast 2 and Raycast Beta only register a local extension through the develop handshake (a `raycast://cli/…` deep link that also launches the app if needed), so they are never restarted; the session stops after the first successful build and the extension stays installed. `make install` runs `pnpm install --frozen-lockfile` first when `node_modules` is missing or older than `pnpm-lock.yaml`. Run it again after pulling changes. `make uninstall` removes the build from every folder and restarts the running apps; `make restart-raycast` only restarts them.
+
+Without `make`: `pnpm install --frozen-lockfile && pnpm run install-local`.
 
 ## Requirements
 
@@ -156,22 +169,22 @@ This extension takes full advantage of OrbStack's unique features:
 ### Build from Source
 
 ```bash
-git clone <repo-url>
-cd orbstack
-npm install
-npm run dev
+git clone git@github.com:nmindz/raycast-orbstack.git
+cd raycast-orbstack
+pnpm install
+pnpm run dev
 ```
 
 ### Build for Production
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ### Lint
 
 ```bash
-npm run lint
+pnpm run lint
 ```
 
 ## Architecture
@@ -188,8 +201,8 @@ The extension follows the Docker Raycast extension patterns:
 
 Contributions welcome! Please ensure:
 
-- All code passes `npm run lint`
-- All code builds with `npm run build`
+- All code passes `pnpm run lint`
+- All code builds with `pnpm run build`
 - Follow existing patterns for consistency
 - Test all commands manually in Raycast
 

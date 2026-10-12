@@ -12,6 +12,7 @@
     "Developer Tools"
   ],
   "license": "MIT",
+  "packageManager": "pnpm@12.11.2",
   "commands": [
     {
       "name": "container_list",
@@ -96,9 +97,6 @@
     "@raycast/utils": "^1.17.0",
     "@priithaamer/dockerode": "^3.3.1-priithaamer.1"
   },
-  "overrides": {
-    "tar-fs": ">=3.1.1"
-  },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
     "@types/node": "22.13.10",
@@ -110,9 +108,11 @@
   "scripts": {
     "build": "ray build",
     "dev": "ray develop",
+    "install-local": "scripts/raycast-local.sh install",
+    "uninstall-local": "scripts/raycast-local.sh uninstall",
     "fix-lint": "ray lint --fix",
     "lint": "ray lint",
-    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
-    "publish": "npx @raycast/api@latest publish"
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`pnpm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "pnpm dlx --package=@raycast/api@latest ray publish"
   }
 }
