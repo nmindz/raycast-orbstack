@@ -208,7 +208,7 @@ Contributions welcome! Please ensure:
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE). Code derived from the Raycast Docker extension keeps its MIT notice in [NOTICE](NOTICE).
 
 ## Credits
 
